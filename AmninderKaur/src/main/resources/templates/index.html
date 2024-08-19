@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Index</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+
+        header, footer {
+            background-color: #333;
+            color: white;
+            padding: 1rem;
+            text-align: center;
+        }
+
+        h2 {
+            text-align: center;
+            color: #333;
+        }
+
+        a {
+            color: #5cb85c;
+            text-decoration: none;
+            padding: 0.5rem 1rem;
+            margin: 0 0.5rem;
+            display: inline-block;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        p {
+            text-align: center;
+            margin: 1rem 0;
+            color: #666;
+        }
+
+        table {
+            width: 80%;
+            margin: 2rem auto;
+            border-collapse: collapse;
+            background: white;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+        }
+
+        th, td {
+            padding: 1rem;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        th {
+            background-color: #5cb85c;
+            color: white;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+
+        tr:hover {
+            background-color: #f1f1f1;
+        }
+    </style>
+</head>
+<body>
+<header th:insert="fragments/header.html :: header"></header>
+<a th:href="@{/login}">Login</a>
+<a th:href="@{/signup}">Signup</a>
+<p>To Book a room, login.</p>
+<h2>Room List</h2>
+<table>
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Type</th>
+            <th>Price</th>
+            <th>Availability</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr th:each="room : ${rooms}">
+            <td th:text="${room.roomId}">Room ID</td>
+            <td th:text="${room.roomType}">Room Type</td>
+            <td th:text="${room.price}">Price</td>
+            <td th:text="${room.availability ? 'Available' : 'Booked'}">Availability</td>
+        </tr>
+    </tbody>
+</table>
+
+<footer th:replace="fragments/footer.html :: footer"></footer>
+</body>
+</html>

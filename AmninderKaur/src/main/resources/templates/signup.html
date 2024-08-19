@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="../static/js/passwordCheck.js" th:src="@{/js/passwordCheck.js}"></script>
+    <title>Sign Up</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+        
+        header, footer {
+            background-color: #333;
+            color: white;
+            padding: 1rem;
+            text-align: center;
+        }
+        
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+        
+        form {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 1rem;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+        
+        input[type="email"], input[type="text"], input[type="password"] {
+            width: 100%;
+            padding: 0.8rem;
+            margin-bottom: 1rem;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        
+        input[type="submit"] {
+            background-color: #5cb85c;
+            border: none;
+            color: white;
+            padding: 0.8rem;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 1rem;
+            margin-top: 1rem;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        
+        input[type="submit"]:hover {
+            background-color: #4cae4c;
+        }
+        
+        .error {
+            color: red;
+            margin: 1rem 0;
+        }
+    </style>
+</head>
+<body>
+<header th:insert="fragments/header.html :: header"></header>
+<h1>Sign Up</h1>
+<div id="error" class="error"></div>
+<form name="form" action="#" th:action="@{/signup}" method="post" onsubmit="return verify()">
+    <label for="email">Email:</label>
+    <input type="email" id="email" name="email" /><br>
+    
+    <label for="name">Name:</label>
+    <input type="text" id="name" name="name" /><br>
+    
+    <label for="username">Username:</label>
+    <input type="text" id="username" name="username" /><br>
+    
+    <label for="password">Password:</label>
+    <input type="password" id="password" name="password" /><br>
+    
+    <label for="verifyPassword">Verify Password:</label>
+    <input type="password" id="verifyPassword" name="verifyPassword" /><br>
+    
+    <input type="submit" value="Register">
+</form>
+<footer th:replace="fragments/footer.html :: footer"></footer>
+</body>
+</html>

@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title >Bookings</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+
+        header, footer {
+            background-color: #333;
+            color: white;
+            padding: 1rem;
+            text-align: center;
+        }
+
+        nav {
+            background-color: #5cb85c;
+            padding: 0.5rem;
+            text-align: center;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            padding: 0.5rem 1rem;
+            margin: 0 0.5rem;
+            display: inline-block;
+        }
+
+        nav a:hover {
+            background-color: #4cae4c;
+            border-radius: 4px;
+        }
+
+        h3 {
+            text-align: center;
+            color: #333;
+            margin-top: 1rem;
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+
+        div {
+            max-width: 1000px;
+            margin: 2rem auto;
+            padding: 1rem;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        p {
+            color: red;
+            text-align: center;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1rem 0;
+        }
+
+        th, td {
+            padding: 1rem;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        th {
+            background-color: #5cb85c;
+            color: white;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+
+        tr:hover {
+            background-color: #f1f1f1;
+        }
+
+        a {
+            color: #5cb85c;
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+<header th:insert="fragments/header.html :: header"></header>
+<nav>
+    <a th:href="@{/user}">Home</a>
+    <a th:href="@{/logout}" th:if="${loggedIn}">Logout</a>
+</nav>
+<h3>Welcome, <span th:text="${username}">User</span></h3>
+<div>
+    <h1 >Room Bookings</h1>
+
+    <!-- Display error message if there is an error -->
+    <div th:if="${error != null}">
+        <p th:text="${error}"></p>
+    </div>
+
+    <!-- Show the existing bookings table -->
+    <table>
+        <thead>
+            <tr>
+                <th>Booking Id</th>
+                <th>Room</th>
+                <th>User</th>
+                <th>Price</th>
+                <th>Start Date</th>
+                <th>End Date</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="booking : ${bookings}">
+                <td th:text="${booking.bookingId}">Booking ID</td>
+                <td th:text="${booking.roomType}">Room Type</td>
+                <td th:text="${booking.userName}">User Name</td>
+                <td th:text="${booking.price}">Price</td>
+                <td th:text="${booking.checkInDate}">Check-In Date</td>
+                <td th:text="${booking.checkOutDate}">Check-Out Date</td>
+                <td>
+                    <a th:href="@{/user/bookingFormEdit/{id}(id=${booking.bookingId})}">Edit</a>
+                    <a th:href="@{/user/deleteBookingById/{id}(id=${booking.bookingId})}">Delete</a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+<footer th:replace="fragments/footer.html :: footer"></footer>
+</body>
+</html>

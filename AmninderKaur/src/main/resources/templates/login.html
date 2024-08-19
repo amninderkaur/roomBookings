@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Login Page</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+        
+        header, footer {
+            background-color: #333;
+            color: white;
+            padding: 1rem;
+            text-align: center;
+        }
+        
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+        
+        form {
+            max-width: 400px;
+            margin: 2rem auto;
+            padding: 2rem;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+        
+        input[type="text"], input[type="password"] {
+            width: 100%;
+            padding: 0.8rem;
+            margin-bottom: 1rem;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        
+        input[type="submit"] {
+            background-color: #5cb85c;
+            border: none;
+            color: white;
+            padding: 0.8rem;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 1rem;
+            margin-top: 1rem;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        
+        input[type="submit"]:hover {
+            background-color: #4cae4c;
+        }
+        
+        .error {
+            color: red;
+            margin-bottom: 1rem;
+        }
+        
+        p {
+            text-align: center;
+        }
+        
+        a {
+            color: #5cb85c;
+            text-decoration: none;
+        }
+        
+        a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+<header th:insert="fragments/header.html :: header"></header>
+<h1>Login Page</h1>
+
+<form method="post" th:action="@{/login}">
+    <div th:if="${param.error}">
+        <div class="error">
+            Invalid credentials
+        </div>
+    </div>
+    
+    <label for="username">Username:</label>
+    <input type="text" id="username" name="username" /><br>
+    
+    <label for="password">Password:</label>
+    <input type="password" id="password" name="password" /><br>
+    
+    <input type="submit" value="Log In" name="login-submit"/>
+    
+    <p>If you don't have an account, click here to <a th:href="@{/signup}">Signup</a></p>
+</form>
+
+<footer th:replace="fragments/footer.html :: footer"></footer>
+</body>
+</html>
